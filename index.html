@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>California Overtime Calculator | Accurate Labor Law Standards</title>
+    <meta name="description" content="Calculate your daily and weekly overtime under California labor law. Free tool including the 7th consecutive day rule and double time calculations.">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f8fafc; color: #1e293b; margin: 0; padding: 20px; line-height: 1.6; }
+        .calc-card { max-width: 500px; background: white; margin: 20px auto 40px; padding: 30px; border-radius: 16px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05); border: 1px solid #e2e8f0; }
+        h1 { font-size: 24px; text-align: center; color: #0f172a; margin-bottom: 25px; font-weight: 800; letter-spacing: -0.025em; }
+        label { display: block; font-weight: 600; margin: 18px 0 6px; font-size: 14px; color: #334155; }
+        input { width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 10px; box-sizing: border-box; font-size: 16px; background-color: #f8fafc; transition: all 0.2s; }
+        input:focus { border-color: #2563eb; background-color: #fff; outline: none; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); }
+        .days-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: 5px; }
+        .day-input { text-align: center; padding: 10px 2px; font-size: 15px; border-radius: 8px; }
+        .day-label { text-align: center; font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; }
+        button { width: 100%; background: #2563eb; color: white; border: none; padding: 14px; font-size: 16px; font-weight: 700; border-radius: 10px; cursor: pointer; margin-top: 25px; transition: background 0.2s; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); }
+        button:hover { background: #1d4ed8; }
+        .output-box { margin-top: 25px; padding-top: 20px; border-top: 2px dashed #e2e8f0; display: none; }
+        .row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 15px; color: #475569; }
+        .total-pay { font-weight: 800; color: #16a34a; font-size: 20px; border-top: 1px solid #e2e8f0; padding-top: 12px; margin-top: 12px; }
+        
+        /* SEO Content Area Styling */
+        .seo-content { max-width: 650px; margin: 40px auto; background: white; padding: 35px; border-radius: 16px; border: 1px solid #e2e8f0; }
+        .seo-content h2 { color: #0f172a; font-size: 20px; font-weight: 700; margin-top: 30px; margin-bottom: 12px; border-bottom: 2px solid #f1f5f9; padding-bottom: 6px; }
+        .seo-content p { color: #475569; font-size: 15px; margin-bottom: 16px; }
+        .seo-content ul { padding-left: 20px; color: #475569; font-size: 15px; }
+        .seo-content li { margin-bottom: 8px; }
+        
+        .footer-links { text-align: center; margin: 40px 0; font-size: 13px; }
+        .footer-links a { color: #2563eb; text-decoration: none; margin: 0 10px; font-weight: 500; }
+
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f6f9; color: #1e293b; margin: 0; padding: 20px; line-height: 1.5; }
+        .calc-card { max-width: 500px; background: white; margin: 30px auto; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+        h1 { font-size: 22px; text-align: center; color: #0f172a; margin-bottom: 25px; font-weight: 700; }
+        label { display: block; font-weight: 600; margin: 15px 0 6px; font-size: 14px; color: #334155; }
+        input { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; font-size: 16px; background-color: #f8fafc; transition: all 0.2s; }
+        input:focus { border-color: #2563eb; background-color: #fff; outline: none; }
+        .days-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-top: 5px; }
+        .day-input { text-align: center; padding: 8px 4px; font-size: 14px; }
+        .day-label { text-align: center; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; }
+        button { width: 100%; background: #2563eb; color: white; border: none; padding: 14px; font-size: 16px; font-weight: 700; border-radius: 8px; cursor: pointer; margin-top: 25px; transition: background 0.2s; }
+        button:hover { background: #1d4ed8; }
+        .output-box { margin-top: 25px; padding-top: 20px; border-top: 2px dashed #e2e8f0; display: none; }
+        .row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 15px; color: #475569; }
+        .total-pay { font-weight: 700; color: #16a34a; font-size: 18px; border-top: 1px solid #e2e8f0; padding-top: 10px; margin-top: 10px; }
+        .info-section { max-width: 600px; margin: 40px auto; font-size: 14px; color: #475569; }
+        .footer-links { text-align: center; margin-top: 30px; font-size: 13px; }
+        .footer-links a { color: #2563eb; text-decoration: none; margin: 0 10px; }
+    </style>
+</head>
+<body>
+
+<!-- THE INTERACTIVE TOOL (ABOVE THE FOLD) -->
+<div class="calc-card">
+    <h1>California Overtime Calculator</h1>
+    
+    <label>Hourly Regular Pay Rate ($)</label>
+    <input type="number" id="baseRate" placeholder="e.g. 18.50" step="0.01" min="0">
+
+    <label>Enter Hours Worked Per Day (Consecutive Workweek)</label>
+    <div class="days-grid">
+        <div class="day-label">Day 1</div>
+        <div class="day-label">Day 2</div>
+        <div class="day-label">Day 3</div>
+        <div class="day-label">Day 4</div>
+        <div class="day-label">Day 5</div>
+        <div class="day-label">Day 6</div>
+        <div class="day-label">Day 7</div>
+        
+        <input type="number" id="d1" class="day-input" placeholder="0" min="0" max="24" step="0.5">
+        <input type="number" id="d2" class="day-input" placeholder="0" min="0" max="24" step="0.5">
+        <input type="number" id="d3" class="day-input" placeholder="0" min="0" max="24" step="0.5">
+        <input type="number" id="d4" class="day-input" placeholder="0" min="0" max="24" step="0.5">
+        <input type="number" id="d5" class="day-input" placeholder="0" min="0" max="24" step="0.5">
+        <input type="number" id="d6" class="day-input" placeholder="0" min="0" max="24" step="0.5">
+        <input type="number" id="d7" class="day-input" placeholder="0" min="0" max="24" step="0.5">
+    </div>
+
+    <button onclick="calculateCaliforniaWages()">Calculate Gross Pay</button>
+
+    <div class="output-box" id="results">
+        <div class="row"><span>Total Hours Worked:</span> <span id="totalHoursDisplay">0 hrs</span></div>
+        <div class="row"><span>Regular Hours:</span> <span id="regHoursDisplay">0 hrs</span></div>
+        <div class="row"><span>Overtime Hours (1.5x):</span> <span id="otHoursDisplay">0 hrs</span></div>
+        <div class="row"><span>Double Time Hours (2x):</span> <span id="dtHoursDisplay">0 hrs</span></div>
+        <div class="row total-pay"><span>Estimated Gross Pay:</span> <span id="totalDisplay">$0.00</span></div>
+    </div>
+</div>
+
+<div class="info-section">
+    <h2>Official California Overtime Rules Implemented:</h2>
+    <ul>
+        <li><strong>Daily Overtime:</strong> 1.5x regular rate for hours worked over 8.0 up to 12.0 in a single workday.</li>
+        <li><strong>Daily Double Time:</strong> 2.0x regular rate for hours worked over 12.0 in a single workday.</li>
+        <li><strong>Weekly Overtime:</strong> 1.5x regular rate for hours worked over 40.0 regular hours in a workweek.</li>
+        <li><strong>7th Consecutive Day Rule:</strong> 1.5x regular rate for the first 8 hours worked on the 7th consecutive day of a workweek, and 2.0x regular rate for any hours exceeding 8 on that day.</li>
+    </ul>
+
+<script>
+function calculateCaliforniaWages() {
+    const rate = parseFloat(document.getElementById('baseRate').value) || 0;
+    const days = [
+        parseFloat(document.getElementById('d1').value) || 0,
+        parseFloat(document.getElementById('d2').value) || 0,
+        parseFloat(document.getElementById('d3').value) || 0,
+        parseFloat(document.getElementById('d4').value) || 0,
+        parseFloat(document.getElementById('d5').value) || 0,
+        parseFloat(document.getElementById('d6').value) || 0,
+        parseFloat(document.getElementById('d7').value) || 0
+    ];
+
+    let totalHours = 0;
+    let regularHours = 0;
+    let otHours = 0;
+    let dtHours = 0;
+    let weeklyRegHoursCount = 0;
+    let consecutiveDaysWorked = 0;
+
+    for (let i = 0; i < 7; i++) {
+        let dayHours = days[i];
+        if (dayHours > 0) {
+            totalHours += dayHours;
+            consecutiveDaysWorked++;
+        }
+
+        // Check if 7th Consecutive Day rule applies
+        if (i === 6 && consecutiveDaysWorked === 7) {
+            // Special 7th day rule logic
+            if (dayHours > 8) {
+                otHours += 8;
+                dtHours += (dayHours - 8);
+            } else {
+                otHours += dayHours;
+            }
+        } else {
+            // Standard daily rule logic for days 1 to 6
+            let dayReg = 0;
+            if (dayHours > 12) {
+                dtHours += (dayHours - 12);
+                otHours += 4;
+                dayReg = 8;
+            } else if (dayHours > 8) {
+                otHours += (dayHours - 8);
+                dayReg = 8;
+            } else {
+                dayReg = dayHours;
+            }
+
+            // Apply weekly 40-hour limit filter to regular hours
+            if (weeklyRegHoursCount + dayReg > 40) {
+                let allowedReg = 40 - weeklyRegHoursCount;
+                regularHours += allowedReg;
+                otHours += (dayReg - allowedReg); // Excess transforms to weekly overtime
+                weeklyRegHoursCount = 40;
+            } else {
+                regularHours += dayReg;
+                weeklyRegHoursCount += dayReg;
+            }
+        }
+    }
+
+    let regularPay = regularHours * rate;
+    let otPay = otHours * (rate * 1.5);
+    let dtPay = dtHours * (rate * 2);
+    let totalPay = regularPay + otPay + dtPay;
+
+    document.getElementById('totalHoursDisplay').innerText = totalHours.toFixed(1) + " hrs";
+    document.getElementById('regHoursDisplay').innerText = regularHours.toFixed(1) + " hrs";
+    document.getElementById('otHoursDisplay').innerText = otHours.toFixed(1) + " hrs";
+    document.getElementById('dtHoursDisplay').innerText = dtHours.toFixed(1) + " hrs";
+    document.getElementById('totalDisplay').innerText = "$" + totalPay.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    
+    document.getElementById('results').style.display = 'block';
+}
+</script>
+
+<!-- TARGETED SEO CONTENT BLOCK -->
+<div class="seo-content">
+    <h2>California Overtime Law & Compliance Guide</h2>
+    <p>Understanding wage compliance rules enforced by the California Department of Industrial Relations (DIR) can be complex. Unlike federal standards governed under the FLSA, California labor law applies strict thresholds that calculate extra compensation on both a daily and weekly basis.</p>
+
+    <h2>How Does the CA Overtime Calculator Work?</h2>
+    <p>This automated interface processes multi-tier tracking sequences according to active state industrial codes. To use the tool, simply enter your base regular wage structure followed by the exact block of hours registered across your active 7-day shifts. The script parses standard regular, time-and-a-half (1.5x), and double-time (2.0x) distributions simultaneously.</p>
+
+    <h2>What is the California Daily Overtime Rule?</h2>
+    <p>In the state of California, an employer must compensate non-exempt personnel at a rate of 1.5 times their regular base salary for any hours logged beyond 8.0 hours in a single designated workday. Furthermore, weekly thresholds stipulate that any labor tracking past 40.0 total regular rate hours across a single workweek automatically transitions into standard overtime tracking.</p>
+
+    <h2>When Does Daily Double Time Apply in California?</h2>
+    <p>Double time (2x regular rate) is triggered when a shift surpasses extreme daily lengths. Non-exempt hourly workers are legally entitled to double their baseline pay structure for any hours worked past 12.0 hours in a single calendar workday.</p>
+
+    <h2>Understanding the 7th Consecutive Day Overtime Rule</h2>
+    <p>The 7th consecutive day overtime rule is a frequent source of payroll errors. If an employee is required to work all seven consecutive days inside a defined employer workweek, specific structural protections change:</p>
+    <ul>
+        <li>The first 8.0 hours logged on that 7th consecutive working day must be compensated at the 1.5x overtime premium rate.</li>
+        <li>Any hours worked past 8.0 on that 7th consecutive working day escalate immediately to the 2.0x double-time rate.</li>
+    </ul>
+
+    <h2>What is the Minimum Wage in California?</h2>
+    <p>As of 2026, the baseline California state minimum wage is strictly regulated at <strong>$16.90 per hour</strong> for all non-exempt workers across all operational corporate structures. Local city or county ordinances may enforce higher localized baselines, which take legal precedence over the state floor.</p>
+</div>
+
+<p><small>Disclaimer: This calculator provides estimations based on standard California Department of Industrial Relations (DIR) guidelines. Consult an employment professional or certified payroll specialist for legal wage verification.</small></p>
+</div>
+
+
+<div class="footer-links">
+    <a href="privacy.html">Privacy Policy</a> | <a href="contact.html">Contact Us</a>
+</div>
+
+<script>
+function calculateCaliforniaWages() {
+    const rate = parseFloat(document.getElementById('baseRate').value) || 0;
+    const days = [
+        parseFloat(document.getElementById('d1').value) || 0,
+        parseFloat(document.getElementById('d2').value) || 0,
+        parseFloat(document.getElementById('d3').value) || 0,
+        parseFloat(document.getElementById('d4').value) || 0,
+        parseFloat(document.getElementById('d5').value) || 0,
+        parseFloat(document.getElementById('d6').value) || 0,
+        parseFloat(document.getElementById('d7').value) || 0
+    ];
+
+    let totalHours = 0;
+    let regularHours = 0;
+    let otHours = 0;
+    let dtHours = 0;
+    let weeklyRegHoursCount = 0;
+    let consecutiveDaysWorked = 0;
+
+    for (let i = 0; i < 7; i++) {
+        let dayHours = days[i];
+        if (dayHours > 0) {
+            totalHours += dayHours;
+            consecutiveDaysWorked++;
+        }
+
+        if (i === 6 && consecutiveDaysWorked === 7) {
+            if (dayHours > 8) {
+                otHours += 8;
+                dtHours += (dayHours - 8);
+            } else {
+                otHours += dayHours;
+            }
+        } else {
+            let dayReg = 0;
+            if (dayHours > 12) {
+                dtHours += (dayHours - 12);
+                otHours += 4;
+                dayReg = 8;
+            } else if (dayHours > 8) {
+                otHours += (dayHours - 8);
+                dayReg = 8;
+            } else {
+                dayReg = dayHours;
+            }
+
+            if (weeklyRegHoursCount + dayReg > 40) {
+                let allowedReg = 40 - weeklyRegHoursCount;
+                regularHours += allowedReg;
+                otHours += (dayReg - allowedReg);
+                weeklyRegHoursCount = 40;
+            } else {
+                regularHours += dayReg;
+                weeklyRegHoursCount += dayReg;
+            }
+        }
+    }
+
+    let regularPay = regularHours * rate;
+    let otPay = otHours * (rate * 1.5);
+    let dtPay = dtHours * (rate * 2);
